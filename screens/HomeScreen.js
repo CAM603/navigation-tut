@@ -3,12 +3,19 @@ import {StyleSheet, View, Text, Button, FlatList} from 'react-native';
 
 const HomeScreen = ({navigation, route}) => {
   const [posts, setPosts] = useState([])
+  const [surveys, setSurveys] = useState([])
   useEffect(() => {
     if (route.params?.post) {
       setPosts([route.params?.post, ...posts])
     }
   }, [route.params?.post])
-  console.log(posts)
+
+  useEffect(() => {
+    if (route.params?.survey) {
+      setSurveys([route.params?.survey, ...surveys])
+    }
+  }, [route.params?.survey])
+  console.log(surveys)
   return (
     <View style={styles.container}>
       <Text>Home Screen</Text>
@@ -24,6 +31,10 @@ const HomeScreen = ({navigation, route}) => {
       <Button
         title="Create post"
         onPress={() => navigation.navigate('CreatePost')}
+      />
+      <Button
+        title="Take a survey"
+        onPress={() => navigation.navigate('Survey')}
       />
       <FlatList
         data={posts}
